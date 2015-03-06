@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-xs-12" style="text-align: center">	
+    <form method="get" action="/autosearch">
+        <img class="animated fadeInDown col-xs-12" style="max-width:800px" src="{{ url_for('static', filename='content/logo_without_background_large.png') }}">
+        <input name="q" class="animated fadeIn col-xs-12 input-lg" type="text" style="text-align: center; max-width: 800px; max-width:100%; animation-delay:500ms; -webkit-animation-delay:500ms" placeholder="Enter an artist, event, or sports team you want to see in person."></input>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.1/animate.min.css">
+<script type="text/javascript">
+    $('#input').keypress(function (e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+        }
+    });
+</script>
+{% endblock %}

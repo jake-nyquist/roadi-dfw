@@ -1,0 +1,48 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="container body-content" id="result-content">
+        <div style="margin: 10px auto; text-align:center" id="loadmsg">
+            Loading..<br />
+            </div>
+
+        <!--<img src="../../digital_assets/ajax-loader.gif" />-->
+        </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="../static/scripts/jquery.timer.js" ></script>
+<script type="text/javascript">
+    var str = "Loading..";
+    $.timer(function () {
+        str += ".";
+        $('#loadmsg').text(str);
+    }, 1000, true);
+    /* {% autoescape false %} */
+    var url = "/results?{{ querystring }}";
+    /* {% endautoescape %} */
+    /* TODO: Make sorting work across pages and do the scroll down to load more thing */
+    $.get(url + "&p=0",
+        function (data) {
+            $("#result-content").html(data);
+        }
+    ).fail(
+        function () {
+            $("#result-content").html("GET error");
+        }
+    );
+</script>
+
+<style type="text/css">
+    .item {
+        border-radius: 3px;
+        border: 1px solid;
+        border-color: #283036;
+        color: #283036;
+        font-size: 22px;
+        margin: 10px 3px 10px 3px;
+        padding: 5px 7px 5px 7px;
+        text-align: center;
+    }
+</style>
+{% endblock %}

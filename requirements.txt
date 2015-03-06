@@ -1,0 +1,7 @@
+Fuzzywuzzy
+requests
+grequests
+python-dateutil
+greenlet
+python-Levenshtein
+Flask<1

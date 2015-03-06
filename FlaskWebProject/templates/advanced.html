@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Advanced Search</h1>
+<form action="/search" method="POST">
+	<div class="form-group">
+		<label for="entityInput">Who or what do you want to see?</label>
+		<input type="text" class="form-control" name="entity" placeholder="e.g. 'Drake' or 'Houston Rockets'">
+	</div>
+	<div class="form-group">
+		<label for="startingCityInput">What city are you starting from?</label>
+		<input type="text" class="form-control" name="startingCity" placeholder="e.g. 'Dallas, TX'">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputFile">When do you want to go?</label>
+		<span><br/>Between</span>
+		<input type="datetime" class="form-control datepicker" name="startDateTime" id="startDateTime">
+		<span>and</span>
+		<input type="datetime" class="form-control datepicker" name="endDateTime" id="endDateTime">
+	</div>
+	<input type="submit" class="btn btn-default">
+</form>
+{% endblock %}
+{% block scripts %}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/css/datepicker3.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+	$('.datepicker').datepicker({
+		startDate: '0d',
+		todayHighlight: true,
+		autoclose: true
+	});
+
+	$start = $('#startDateTime'); 
+	$end = $('#endDateTime');
+
+	$start.datepicker().on('hide', function(e) {
+		$end.datepicker('setStartDate', $start.datepicker('getDate'));
+		$end.datepicker('show');
+	});
+</script>
+{% endblock %}

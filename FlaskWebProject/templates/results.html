@@ -1,0 +1,18 @@
+
+{% if results.success %}
+<h1>Results</h1>
+<div class="container col-xs-12">
+	{% for item in results.events %}
+	<div class="col-xs-12 item">
+		<span><strong>{{ item.title }}</strong></span> | <span>{{ item.date }}</span> | <span>{{ item.city }}</span> | <span><strong>{{ item.price }}</strong></span>
+		<br/><span><strong>Admission:</strong> <a target="_blank" href="{{ item.admission.link }}">{{ item.admission.price }}</a></span> <span><strong>Travel:</strong> <a target="_blank" href="{{ item.outbound.link }}">{{ item.travelPrice }}</a></span>
+		<br/><span><strong>Outbound Flight:</strong> {{ item.outbound.name }} | {{ item.outbound.date}} | {{ item.outbound.homePort }} ({{item.outbound.start}}) to {{ item.outbound.destPort }} ({{ item.outbound.end }})</span>
+		<br/><span><strong>Return Flight:</strong> {{ item.inbound.name }} | {{ item.inbound.date }} | {{ item.inbound.homePort }} ({{ item.inbound.start }}) to  {{ item.inbound.destPort }} ({{ item.inbound.end }})</span>
+	</div>
+	{% endfor %}
+</div>
+{% else %}
+<h1>Error</h1>
+<p>No results available. Please try a different query.</p>
+{% endif %}
+
